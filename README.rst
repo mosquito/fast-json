@@ -1,7 +1,7 @@
 fast-json
 =========
 
-Fast JSON serialization and deserialization with ujson.
+Combines best parts of json and ujson for fast serialization.
 
 .. code-block:: python
 

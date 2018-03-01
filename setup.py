@@ -3,13 +3,13 @@ from setuptools import setup
 
 setup(
     name='fast-json',
-    version='0.1.0',
+    version='0.2.0',
     platforms="all",
     author="Dmitry Orlov",
     author_email="me@mosquito.su",
     maintainer="Dmitry Orlov",
     maintainer_email="me@mosquito.su",
-    description="Fast JSON serialization and deserialization with ujson",
+    description="Combines best parts of json and ujson for fast serialization",
     package_dir={'': 'src'},
     packages=[''],
     license="Apache 2",
