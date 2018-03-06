@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='fast-json',
-    version='0.2.0',
+    version='0.2.1',
     platforms="all",
     author="Dmitry Orlov",
     author_email="me@mosquito.su",
@@ -12,6 +12,7 @@ setup(
     description="Combines best parts of json and ujson for fast serialization",
     package_dir={'': 'src'},
     packages=[''],
+    install_requires=["ujson"],
     license="Apache 2",
     long_description=open('README.rst').read(),
     classifiers=[
