@@ -41,14 +41,14 @@ def _from_iterable(value: Iterable):
 
 def dumps(obj, *args, **kwargs):
     return json.dumps(
-        convert(obj),
+        obj, default=convert,
         *args, **kwargs
     )
 
 
 def dump(obj, *args, **kwargs):
     return json.dump(
-        convert(obj),
+        obj, default=convert,
         *args, **kwargs
     )
 
