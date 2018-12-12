@@ -8,6 +8,7 @@ from types import MappingProxyType
 import ujson
 
 
+GeneratorType = type(_ for _ in range(0))
 DictItems = type({}.items())
 DictKeys = type({}.keys())
 DictValues = type({}.values())
@@ -31,11 +32,13 @@ def _from_date(obj: datetime):
 @convert.register(DictKeys)
 @convert.register(DictValues)
 @convert.register(Iterator)
+@convert.register(GeneratorType)
+@convert.register(tuple)
 @convert.register(frozenset)
 @convert.register(range)
 @convert.register(set)
 def _from_iterable(value):
-    return [convert(item) for item in value]
+    return list(value)
 
 
 @convert.register(DictItems)

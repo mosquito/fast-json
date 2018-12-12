@@ -3,7 +3,7 @@ from setuptools import setup
 
 setup(
     name='fast-json',
-    version='0.3.1',
+    version='0.3.2',
     platforms="all",
     author="Dmitry Orlov",
     author_email="me@mosquito.su",
