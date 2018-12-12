@@ -1,12 +1,12 @@
 import base64
 import json
-from collections.abc import Iterator, Generator
+from collections.abc import Iterator
 from datetime import datetime
 from functools import singledispatch
 from types import MappingProxyType
-from typing import Any
 
 import ujson
+
 
 DictItems = type({}.items())
 DictKeys = type({}.keys())
@@ -14,7 +14,7 @@ DictValues = type({}.values())
 
 
 @singledispatch
-def convert(obj: Any):
+def convert(obj):
     return str(obj)
 
 
@@ -31,7 +31,6 @@ def _from_date(obj: datetime):
 @convert.register(DictKeys)
 @convert.register(DictValues)
 @convert.register(Iterator)
-@convert.register(Generator)
 @convert.register(frozenset)
 @convert.register(range)
 @convert.register(set)
