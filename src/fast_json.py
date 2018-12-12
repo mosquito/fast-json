@@ -1,11 +1,12 @@
 import base64
 import json
-import ujson
-from functools import singledispatch
-from types import GeneratorType
-from typing import Any, Iterable
-
+from collections.abc import Iterator, Generator
 from datetime import datetime
+from functools import singledispatch
+from types import MappingProxyType
+from typing import Any
+
+import ujson
 
 DictItems = type({}.items())
 DictKeys = type({}.keys())
@@ -22,21 +23,32 @@ def _from_bytes(value: bytes):
     return base64.b64encode(value).decode()
 
 
-@convert.register(DictItems)
-def _from_dict_items(obj: DictItems):
-    return dict(obj)
-
-
 @convert.register(datetime)
 def _from_date(obj: datetime):
     return obj.isoformat()
 
 
-@convert.register(GeneratorType)
 @convert.register(DictKeys)
 @convert.register(DictValues)
-def _from_iterable(value: Iterable):
+@convert.register(Iterator)
+@convert.register(Generator)
+@convert.register(frozenset)
+@convert.register(range)
+@convert.register(set)
+def _from_iterable(value):
     return [convert(item) for item in value]
+
+
+@convert.register(DictItems)
+@convert.register(MappingProxyType)
+def _from_dict_items(obj: DictItems):
+    return dict(obj)
+
+
+@convert.register(bytearray)
+@convert.register(memoryview)
+def _from_views(value):
+    return bytes(value)
 
 
 def dumps(obj, *args, **kwargs):
